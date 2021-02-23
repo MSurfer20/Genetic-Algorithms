@@ -1,11 +1,17 @@
 import random
 from client import *
 from csv import writer
+import csv
+from super50 import arr
 
 og_arr= [0.0, -1.45799022e-12, -2.28980078e-13,  4.62010753e-11, -1.75214813e-10, -1.83669770e-15,  8.52944060e-16,  2.29423303e-05, -2.04721003e-06, -1.59792834e-08,  9.98214034e-10]
-SECRET_KEY='H6geON26Ve5GxQDO1CDzkff4ZOn2kHEPV0DMMnfm6OEWfIBQ1I'
-
-
+# SECRET_KEY='H6geON26Ve5GxQDO1CDzkff4ZOn2kHEPV0DMMnfm6OEWfIBQ1I'
+curr_population=[]
+with open('tested_vals.csv', newline='') as csvfile:
+    curr_population+=list(csv.reader(csvfile))
+# print(curr_population)
+curr_population=arr
+print(arr)
 ##########################################################################################################################################
 
 
@@ -78,6 +84,7 @@ def create_next_gen(population):
 
 ##########################################################################################################################################
 
-curr_population=initial_population(og_arr)
+
+# curr_population=initial_population(og_arr)
 # print(curr_population)
-create_next_gen(curr_population)
+# create_next_gen(curr_population)
