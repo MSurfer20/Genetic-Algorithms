@@ -24,7 +24,7 @@ def initial_population (given_vector):
             chance = random.randint(1,100)
 
             if chance < prob:
-                trial_arr.append(random.randint(-10,10))
+                trial_arr.append(random.uniform(-10,10))
 
             else:
                 trial_arr.append(i)
@@ -37,8 +37,8 @@ def get_score(population):
     for each_arr in population:
         score=get_errors(SECRET_KEY, each_arr)
         return_arr.append([each_arr, score])
-        insert_csv(curr_population, score)
-        print(curr_population, score)
+        insert_csv(each_arr, score)
+        print(each_arr, score)
     return return_arr
         
 
