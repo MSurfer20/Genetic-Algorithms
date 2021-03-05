@@ -1,10 +1,11 @@
 import random
 from client import *
-from gen1 import gen1
-from temp1 import *
+# from gen1 import gen1
+# from temp1 import *
+from march_test3 import *
 
-parent_generation = seventh_gen
-next_generation = "eighth_gen"
+parent_generation = eighth
+next_generation = "ninth"
 
 SECRET_KEY='H6geON26Ve5GxQDO1CDzkff4ZOn2kHEPV0DMMnfm6OEWfIBQ1I'
 
