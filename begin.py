@@ -20,11 +20,11 @@ def initial_population (given_vector):
             chance = random.uniform(1,100)
 
             if chance <= prob:
-                ch = random.uniform(-0.8,0.8)
+                ch = random.uniform(-0.2,0.2)
                 if i!=0:
                     trial_arr.append(i*(1+ch))
                 else:
-                    trial_arr.append(random.uniform(-1e-5, 1e-5))
+                    trial_arr.append(random.uniform(-1e-9, 1e-9))
 
             else:
                 trial_arr.append(i)

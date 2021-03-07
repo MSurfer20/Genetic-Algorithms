@@ -1,6 +1,6 @@
-from temp import third_gen
+from march_test8 import *
 from pprint import pprint
-arr = third_gen
+arr = first
 
 for i in range(len(arr)):
     for j in range(len(arr)):
@@ -9,4 +9,4 @@ for i in range(len(arr)):
             arr[i] = arr[j]
             arr[j] = xd
 
-print(arr)
+pprint(arr)
