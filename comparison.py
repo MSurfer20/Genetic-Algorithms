@@ -13,7 +13,7 @@ from march_test6 import *
 
 arr = first_gen + second_gen + third_gen + fourth_gen + fifth_gen +sixth_gen +seventh_gen+eigth_gen+ninth_gen+tenth_gen
 arr = arr + a1+b1+c1+d1+e1+f1+g1
-arr = arr + first_x1+second_x1+third_x1+fourth_x1+fifth_x1+sixth_x1+seventh_x1+eighth_x1+ninth_x1
+arr = arr+ first_x1+second_x1+third_x1+fourth_x1+fifth_x1+sixth_x1+seventh_x1+eighth_x1+ninth_x1
 arr = arr + first_x2+second_x2+third_x2+fourth_x2+fifth_x2+sixth_x2+seventh_x2+eighth_x2+ninth_x2
 arr = arr + first_x3+second_x3+third_x3+fourth_x3+fifth_x3+sixth_x3+seventh_x3+eighth_x3
 arr = arr + first_x4+second_x4+third_x4+fourth_x4+fifth_x4+sixth_x4+seventh_x4+eighth_x4+ninth_x4+tenth_x4
@@ -21,33 +21,38 @@ arr = arr + first_x5+second_x5+third_x5+fourth_x5+fifth_x5+sixth_x5+seventh_x5+e
 arr = arr + first_x6+second_x6+third_x6+fourth_x6+fifth_x6+sixth_x6
 
 
-for i in range(len(arr)):
-    for j in range(len(arr)):
-        if arr[i][12]+arr[i][11] > arr[j][12]+arr[j][11] and i<j:
-            xd = arr[i]
-            arr[i] = arr[j]
-            arr[j] = xd
+# for i in range(len(arr)):
+#     for j in range(len(arr)):
+#         if arr[i][12] > arr[j][12] and i<j:
+#             xd = arr[i]
+#             arr[i] = arr[j]
+#             arr[j] = xd
 
-cnt=0
-for i in arr:
-    if (i[11]<=i[12] and 3.5*i[11]>=i[12]) or (i[12]<=i[11] and 3.5*i[12]>=i[11]):
-        print(i)
-        cnt+=1
-        if cnt>=10:
-            break
-print(cnt)
+# cnt=0
+# for i in arr:
+#     if (i[11]<=i[12] and 3.5*i[11]>=i[12]) or (i[12]<=i[11] and 3.5*i[12]>=i[11]):
+#         print(i)
+#         cnt+=1
+#         if cnt>=10:
+#             break
+# print(cnt)
+
+# for i in range(10,30):
+#     print(arr[i])
+#     print()
+# print(arr[0:9])
 
 
 ################################################################
 
-# cnt =0
+cnt =0
 
-# for i in arr:
-#     if i[11]<=150000000000 and i[12]<=190000000000:
-#         cnt=cnt+1
-#         print(i)
+for i in arr:
+    if i[11]<=200000000000 and i[12]<=200000000000:
+        cnt=cnt+1
+        print(i)
 
-# print(cnt)
+print(cnt)
 
 
 ################################################################
