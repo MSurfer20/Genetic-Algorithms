@@ -1,9 +1,9 @@
 import random
 from submit import *
-from march_test12 import *
+from march_test14 import *
 
-parent_generation = third_x12
-next_generation = "fourth_x12"
+parent_generation = fourth_x14
+next_generation = "fifth_x14"
 
 SECRET_KEY='H6geON26Ve5GxQDO1CDzkff4ZOn2kHEPV0DMMnfm6OEWfIBQ1I'
 
@@ -81,4 +81,3 @@ for i in range(len(child_generation)):
             child_generation[j] = xd
             
 print(next_generation,"=",child_generation)
-
