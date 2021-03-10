@@ -12,7 +12,8 @@
 # from march_test9 import *
 # from march_test10 import *
 # from march_test11 import *
-from march_test12 import *
+from march_test14 import *
+from march_test15 import *
 
 # for i in range(30):
 #     print(fifth_gen[i][11], fifth_gen[i][12],'\t',sixth_gen[i][11], sixth_gen[i][12],'\t',seventh_gen[i][11], seventh_gen[i][12],'\t',fifth_gen[i][11]-seventh_gen[i][11], fifth_gen[i][12]-seventh_gen[i][12])
@@ -30,7 +31,9 @@ from march_test12 import *
 # arr = arr + first_x9+second_x9+third_x9+fourth_x9+fifth_x9
 # arr = arr + first_x10+second_x10+third_x10+fourth_x10+fifth_x10+sixth_x10+seventh_x10+eighth_x10
 #arr = first_x11+second_x11+third_x11+fourth_x11+fifth_x11+sixth_x11+seventh_x11+eighth_x11+ninth_x11+tenth_x11
-arr = first_x12+second_x12+third_x12+fourth_x12+fifth_x12+sixth_x12+seventh_x12+eighth_x12+ninth_x12+tenth_x12
+# arr = first_x12+second_x12+third_x12+fourth_x12+fifth_x12+sixth_x12+seventh_x12+eighth_x12+ninth_x12+tenth_x12
+arr = first_x14+second_x14+third_x14+fourth_x14+fifth_x14#+sixth_x14+seventh_x14+eighth_x14+ninth_x14+tenth_x14
+arr = first_x15+second_x15+third_x15+fourth_x15+fifth_x15+sixth_x15+seventh_x15+eighth_x15+ninth_x15+tenth_x15+eleventh_x15
 
 # arr=first+second+third+fourth+fifth+sixth+seventh+eighth
 
@@ -42,15 +45,15 @@ arr = first_x12+second_x12+third_x12+fourth_x12+fifth_x12+sixth_x12+seventh_x12+
 #             arr[i] = arr[j]
 #             arr[j] = xd
 
-cnt=0
-for i in arr:
-    if (i[11]<=i[12] and 1.5*i[11]>=i[12]) or (i[12]<=i[11] and 1.5*i[12]>=i[11]):
-        print(i)
-        print()
-        cnt+=1
-        if cnt>=10:
-            break
-print(cnt)
+# cnt=0
+# for i in arr:
+#     if (i[11]<=i[12] and 1.1*i[11]>=i[12]) or (i[12]<=i[11] and 1.1*i[12]>=i[11]):
+#         print(i)
+#         print()
+#         cnt+=1
+#         if cnt>=10:
+#             break
+# print(cnt)
 
 # for i in range(10,30):
 #     print(arr[i])
@@ -60,19 +63,19 @@ print(cnt)
 
 ################################################################
 
-# cnt =0
+cnt =0
 
-# for i in arr:
-#     if i[11]<=150000000000 and i[12]<=150000000000: #and i[11]<=10000000000000 and i[12]<=10000000000000:
-#         cnt=cnt+1
-#         # print(i)
-#         print()
+for i in arr:
+    if i[11]<=150000000000 and i[12]<=150000000000:# and i[11]<=10000000000000 and i[12]<=10000000000000:
+        cnt=cnt+1
+        # print(i)
+        print()
 
-# print(cnt)
+print(cnt)
 
-# for i in range(6):
-#     print(arr[i])
-#     print()
+for i in range(6):
+    print(arr[i])
+    print()
 
 ################################################################
 
