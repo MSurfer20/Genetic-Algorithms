@@ -1,24 +1,33 @@
 import random
-from client import *
-# from gen1 import gen1
-# from temp1 import *
-from march_test11 import *
+from submit import *
+from march_test12 import *
 
-parent_generation = ninth_x11
-next_generation = "tenth_x11"
+parent_generation = third_x12
+next_generation = "fourth_x12"
 
 SECRET_KEY='H6geON26Ve5GxQDO1CDzkff4ZOn2kHEPV0DMMnfm6OEWfIBQ1I'
 
 def cross_over(parent1, parent2):
     
     child=[]
+    cnt1=0
+    cnt2=0
 
     for i in range(11):
+
         a=random.randint(0,1)
-        if a:
+
+        if a and cnt1<5:
             child.append(parent1[i])
-        else:
+            cnt1=cnt1+1
+
+        elif cnt2<5:
             child.append(parent2[i])
+            cnt2=cnt2+1
+
+        else:
+            child.append(parent1[i])
+            cnt1=cnt1+1
 
         chance=random.uniform(1,100)
 
@@ -26,7 +35,7 @@ def cross_over(parent1, parent2):
             ch = random.uniform(-0.01,0.01)
             child[i]=child[i]*(1+ch)
             if child[i]==0:
-                child[i]=random.uniform(-1e-8,1e-8)
+                child[i]=random.uniform(-1e-5,1e-5)
 
     return child
         
@@ -37,7 +46,6 @@ def get_score(vector):
     return vector
     
 def create_next_gen(population):
-    #TODO: SORT ON BASIS OF TRAINING
     return_population=[]
     for i in range(30):
         par1 = random.randint(0, 5)
@@ -51,7 +59,7 @@ def create_next_gen(population):
 
 for i in range(len(parent_generation)):
     for j in range(len(parent_generation)):
-        if parent_generation[i][11] > parent_generation[j][11] and i<j:
+        if 0.7*parent_generation[i][11]+parent_generation[i][12] > 0.7*parent_generation[j][11]+parent_generation[j][12] and i<j:
             xd = parent_generation[i]
             parent_generation[i] = parent_generation[j]
             parent_generation[j] = xd
@@ -67,9 +75,10 @@ child_generation=create_next_gen(parent_generation)
 
 for i in range(len(child_generation)):
     for j in range(len(child_generation)):
-        if child_generation[i][12] > child_generation[j][12] and i<j:
+        if 0.7*child_generation[i][12]+child_generation[i][11] > 0.7*child_generation[j][12]+child_generation[j][11] and i<j:
             xd = child_generation[i]
             child_generation[i] = child_generation[j]
             child_generation[j] = xd
             
 print(next_generation,"=",child_generation)
+
