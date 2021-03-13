@@ -4,6 +4,10 @@ from march_test18 import *
 
 parent_generation = fourth_x18
 next_generation = "fifth_x18"
+from march_test20 import *
+
+parent_generation = eleventh_x20
+next_generation = "_x20"
 
 SECRET_KEY='H6geON26Ve5GxQDO1CDzkff4ZOn2kHEPV0DMMnfm6OEWfIBQ1I'
 
