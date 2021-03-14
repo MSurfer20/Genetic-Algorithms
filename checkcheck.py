@@ -1,10 +1,19 @@
 import client
 import submit
+from march_test22 import *
+
+print(len(twelfth_gen))
+
 SECRET_KEY='H6geON26Ve5GxQDO1CDzkff4ZOn2kHEPV0DMMnfm6OEWfIBQ1I'
-jai_mata_di = [13e8,78e15,32e16,31e21,2e5,53e11,12e11,28e16,39e5,60e17,52e18]
-
-
+jai_mata_di = [8.924133530503906e-07, -5.261884485722044e-13, -9.532283554580433e-14, 1.8817382520315134e-12, -1.3087831232792214e-11, -1.522073973720486e-16, 7.729142359803721e-17, 4.735318593429672e-06, -5.624767893684198e-07, -3.161914105077791e-10, 1.6312992342644402e-10, 265840837278.16772, 385050793868.10675]
 jai_mata_di=jai_mata_di[:11]
+
+# for arr in twelfth_gen:
+#     jai_mata_di = arr
+#     # jai_mata_di=jai_mata_di[:11]
+#     submit.submit(SECRET_KEY, jai_mata_di[:11])
+#     print(jai_mata_di)
+#     input()
 
 # score = submit.get_errors(SECRET_KEY, jai_mata_di)
 # print(score)
