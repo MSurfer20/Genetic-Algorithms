@@ -199,12 +199,12 @@ for gen_number in range(number_of_generations-1): # Iterate through each of the 
     unmodulated_child_generation=next_gen_tuple[1] #Stores the child generation before modulation
 
     next_gen_tuple=get_errors_and_sort(child_generation, unmodulated_child_generation)
-    child_generation=next_gen_tuple[0] # Store sorted child generation(based on the fitness function)
-    unmodulated_child_generation=next_gen_tuple[1] # Store sorted unmodulated child generation(based on the fitness function)
+    child_generation=next_gen_tuple[1] # Store sorted child generation(based on the fitness function)
+    unmodulated_child_generation=next_gen_tuple[0] # Store sorted unmodulated child generation(based on the fitness function)
 
     if((gen_number+1)%3==0):
         mutation_chance=max(20, mutation_chance-mutation_chance_decrease) # Reduces the mutation chance with each increasing iteration
 
     print("unmodulated_genration_"+str(gen_number+2),"=",child_generation.tolist())
     print("genration_"+str(gen_number+2),"=",unmodulated_child_generation.tolist())
-    current_generation=child_generation
+    current_population=child_generation
