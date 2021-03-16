@@ -3,8 +3,8 @@ import random
 import sys
 
 parent = pari+para
-child = final
-param = 0.75
+child = final2
+param = 0.85
 ans = []
 cnt=0
 
