@@ -3,15 +3,10 @@ from submit import *
 import random
 import time
 
-parent_range=6
-population_size=1
+parent_range=2
+population_size=3
 MAX_DEGREE=11
 SECRET_KEY='H6geON26Ve5GxQDO1CDzkff4ZOn2kHEPV0DMMnfm6OEWfIBQ1I'
-
-
-
-
-
 
 def initial_population (given_vector):
     
@@ -38,30 +33,13 @@ def initial_population (given_vector):
         
     return return_population
 
-og_arr=np.array([0.0, -1.45799022e-12, -2.28980078e-13,  4.62010753e-11, -1.75214813e-10, -1.83669770e-15,  8.52944060e-16,  2.29423303e-05, -2.04721003e-06, -1.59792834e-08,  9.98214034e-10])
-
-
-random.seed(time.time())
-starting_population=(initial_population(og_arr))
-errors=np.zeros(population_size)
-for i in range(len(starting_population)):
-    errors_arr=get_errors(SECRET_KEY, starting_population[i].tolist()[:11])
-    print(errors_arr)
-    starting_population[i][11]=errors_arr[0]
-    starting_population[i][12]=errors_arr[1]
-    errors[i]=0.7*errors_arr[0]+errors_arr[1]
-geninds=np.copy(errors.argsort())
-starting_population=np.copy(starting_population[geninds[::1]])
-print(starting_population)
-current_population=starting_population
-
 
 
 
 
 def cross_over(parent1, parent2):
     
-    child=np.zeros(MAX_DEGREE)
+    child=np.zeros(MAX_DEGREE+2)
     cnt1=0
     cnt2=0
 
@@ -92,16 +70,17 @@ def cross_over(parent1, parent2):
     return child
         
 def get_score(vector):
+    print(vector)
     score=get_errors(SECRET_KEY, vector.tolist()[:11])
     vector[11]=(score[0])
     vector[12]=(score[1])
     return vector
     
 def create_next_gen(population):
-    return_population=np.zeros(population_size)
+    return_population=np.zeros((population_size, MAX_DEGREE+2))
     for i in range(population_size):
-        par1 = random.randint(0, 5)
-        par2=random.randint(0,5)
+        par1 = random.randint(0, parent_range-1)
+        par2=random.randint(0,parent_range-1)
         ch=cross_over(population[par1], population[par2])
         ch=get_score(ch)
         return_population[i]=(ch)
@@ -116,7 +95,27 @@ def create_next_gen(population):
 #             current_population[i] = current_population[j]
 #             current_population[j] = xd
 #TODO: REQRITE THIS SORT
-errors=numpy.zeros(population_size)
+
+og_arr=np.array([0.0, -1.45799022e-12, -2.28980078e-13,  4.62010753e-11, -1.75214813e-10, -1.83669770e-15,  8.52944060e-16,  2.29423303e-05, -2.04721003e-06, -1.59792834e-08,  9.98214034e-10])
+
+
+random.seed(time.time())
+starting_population=(initial_population(og_arr))
+errors=np.zeros(population_size)
+for i in range(len(starting_population)):
+    errors_arr=get_errors(SECRET_KEY, starting_population[i].tolist()[:11])
+    print(errors_arr)
+    starting_population[i][11]=errors_arr[0]
+    starting_population[i][12]=errors_arr[1]
+    errors[i]=0.7*errors_arr[0]+errors_arr[1]
+geninds=np.copy(errors.argsort())
+starting_population=np.copy(starting_population[geninds[::1]])
+print(starting_population)
+print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+current_population=starting_population
+
+
+errors=np.zeros(population_size)
 for i in range(len(current_population)):
     errors[i]=0.7*starting_population[i][11]+starting_population[i][12]
 geninds=np.copy(errors.argsort())
@@ -128,9 +127,12 @@ for i in (current_population):
     if (i[11]<=i[12] and 5*i[11]>=i[12]) or (i[12]<=i[11] and 5*i[12]>=i[11]):
         parent_for_breeding.append(i)
 
-current_population=np.toarray(parent_for_breeding)
+current_population=np.array(parent_for_breeding)
+print(current_population)
 
 child_generation=create_next_gen(current_population)
+
+print("CCCCCCCCCCCCCCCCCCCCCCCcc")
 
 # for i in range(len(child_generation)):
 #     for j in range(len(child_generation)):
@@ -139,10 +141,10 @@ child_generation=create_next_gen(current_population)
 #             child_generation[i] = child_generation[j]
 #             child_generation[j] = xd
 
-errors=numpy.zeros(child_generation)
+errors=np.zeros(population_size)
 for i in range(len(child_generation)):
     errors[i]=0.7*child_generation[i][11]+child_generation[i][12]
 geninds=np.copy(errors.argsort())
 child_generation=np.copy(child_generation[geninds[::1]])
 
-print(next_generation,"=",child_generation)
+print("next_generation","=",child_generation)
