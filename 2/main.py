@@ -55,7 +55,7 @@ def generate_initial_population (given_vector):
 def cross_over(parent1, parent2):
     
     child=np.zeros(MAX_DEGREE+2)
-    unmodulated_child=np.zeros(MAX_DEGREE+2)
+    # unmodulated_child=np.zeros(MAX_DEGREE+2)
     cnt1=0
     cnt2=0
 
@@ -73,7 +73,7 @@ def cross_over(parent1, parent2):
         else:
             child[i]=(parent1[i])
             cnt1=cnt1+1
-        unmodulated_child[i]=child[i]
+        # unmodulated_child[i]=child[i]
 
         chance=random.uniform(1,100)
 
@@ -83,7 +83,7 @@ def cross_over(parent1, parent2):
             if child[i]==0:
                 child[i]=random.uniform(-zero_val_mutation,zero_val_mutation)
 
-    return (child, unmodulated_child)
+    return child
 
 # Used to fetch the training and validation/testing error for the vector passed as the parameter.
 def get_score(vector):
@@ -140,11 +140,11 @@ def create_next_gen(population):
             # if boss>=150:
             #     break
         ch=cross_over(population[par1], population[par2])
-        unmodulated_population[i]=ch[1]
-        ch=ch[0]
+        # unmodulated_population[i]=ch[1]
+        # ch=ch[0]
         ch=get_score(ch)
         return_population[i]=(ch)
-    return (return_population, unmodulated_population)
+    return return_population
 
 # This function fetches the errors for the first generation formed using generate_inital_population, pushes the 
 # errors into the vectors and then sorts the vectors on basis of weighted sum of training and testing errors.
@@ -161,7 +161,7 @@ def get_errors_and_sort_initial(population):
 
 # This function fetches the errors for the later generation formed using create_next_gen, pushes the 
 # errors into the vectors and then sorts the vectors on basis of weighted sum of training and testing errors.
-def get_errors_and_sort(population, unmodulated_population):
+def get_errors_and_sort(population):
     errors=np.zeros(population_size)
     for i in range(len(population)):
         errors_arr=get_errors(SECRET_KEY, population[i].tolist()[:11])
@@ -170,8 +170,8 @@ def get_errors_and_sort(population, unmodulated_population):
         errors[i]=training_weight*errors_arr[0]+errors_arr[1]
     geninds=np.copy(errors.argsort())
     population=np.copy(population[geninds[::1]])
-    unmodulated_population=np.copy(unmodulated_population[geninds[::1]])
-    return (population, unmodulated_population)
+    # unmodulated_population=np.copy(unmodulated_population[geninds[::1]])
+    return population
 
 
 # The original over-fitted vector provided to us. 
@@ -193,18 +193,17 @@ for gen_number in range(number_of_generations-1): # Iterate through each of the 
 
     current_population=np.array(parent_for_breeding) # Stores the parents of i+th generation
 
-    next_gen_tuple=create_next_gen(current_population) # Gets the ith generation in the form of a tuple whith modulated and unndulated generations
+    # next_gen_tuple=create_next_gen(current_population) # Gets the ith generation in the form of a tuple whith modulated and unndulated generations
 
-    child_generation=next_gen_tuple[0] # Stores the child generation
-    unmodulated_child_generation=next_gen_tuple[1] #Stores the child generation before modulation
+    child_generation=create_next_gen(current_population) # Stores the child generation
+    # unmodulated_child_generation=next_gen_tuple[1] #Stores the child generation before modulation
 
-    next_gen_tuple=get_errors_and_sort(child_generation, unmodulated_child_generation)
-    child_generation=next_gen_tuple[1] # Store sorted child generation(based on the fitness function)
-    unmodulated_child_generation=next_gen_tuple[0] # Store sorted unmodulated child generation(based on the fitness function)
+    # next_gen_tuple=get_errors_and_sort(child_generation)
+    child_generation=get_errors_and_sort(child_generation) # Store sorted child generation(based on the fitness function)
+    # unmodulated_child_generation=next_gen_tuple[1] # Store sorted unmodulated child generation(based on the fitness function)
 
     if((gen_number+1)%3==0):
         mutation_chance=max(20, mutation_chance-mutation_chance_decrease) # Reduces the mutation chance with each increasing iteration
 
-    print("unmodulated_genration_"+str(gen_number+2),"=",child_generation.tolist())
-    print("genration_"+str(gen_number+2),"=",unmodulated_child_generation.tolist())
+    print("genration_"+str(gen_number+2),"=",child_generation.tolist())
     current_population=child_generation
