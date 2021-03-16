@@ -10,6 +10,10 @@ mutation_chance=20
 training_weight=0.7
 number_of_generations=4
 initial_population_type=1
+initial_mutation=0.3
+mutation=0.1
+zero_val_mutation=1e-5
+parent_selection_type=1
 SECRET_KEY='H6geON26Ve5GxQDO1CDzkff4ZOn2kHEPV0DMMnfm6OEWfIBQ1I'
 
 def generate_initial_population (given_vector):
@@ -23,20 +27,17 @@ def generate_initial_population (given_vector):
         else:
             for i in range(len(given_vector)):
             
-                ch = random.uniform(-0.1,0.1)
+                ch = random.uniform(-initial_mutation,initial_mutation)
                 
                 if given_vector[i]!=0:
                     trial_arr[i]=given_vector[i]*(1+ch)
                 
                 else:
-                    trial_arr[i]=(random.uniform(-1e-5, 1e-5))
+                    trial_arr[i]=(random.uniform(-zero_val_mutation, zero_val_mutation))
 
         return_population[k]=trial_arr
         
     return return_population
-
-
-
 
 
 def cross_over(parent1, parent2):
@@ -46,7 +47,6 @@ def cross_over(parent1, parent2):
     cnt2=0
 
     for i in range(11):
-
         a=random.randint(0,1)
 
         if a and cnt1<5:
@@ -64,10 +64,11 @@ def cross_over(parent1, parent2):
         chance=random.uniform(1,100)
 
         if chance<=mutation_chance:
-            ch = random.uniform(-0.01,0.01)
+            ch = random.uniform(-mutation,mutation)
             child[i]=child[i]*(1+ch)
             if child[i]==0:
-                child[i]=random.uniform(-1e-5,1e-5)
+                child[i]=random.uniform(-zero_val_mutation,zero_val_mutation)
+        
 
     return child
         
@@ -80,12 +81,47 @@ def get_score(vector):
 def create_next_gen(population):
     return_population=np.zeros((population_size, MAX_DEGREE+2))
     for i in range(population_size):
-        par1 = random.randint(0, parent_range-1)
-        par2=random.randint(0,parent_range-1)
+        if parent_selection_type:
+            par1 = random.randint(0, parent_range-1)
+            par2=random.randint(0,parent_range-1)
+        else:
+            par1 = random.randint(1, 30)
+            if par1<=5:
+                par1=1
+            elif par1<=10:
+                par1=2
+            elif par1<=15:
+                par1=3
+            elif par1<=20:
+                par1=4
+            elif par1<=25:
+                par1=5
+            else:
+                par1=6
+            par1-=1
+            par2=random.randint(1,30)
+            if par2<=5:
+                par2=1
+            elif par2<=10:
+                par2=2
+            elif par2<=15:
+                par2=3
+            elif par2<=20:
+                par2=4
+            elif par2<=25:
+                par2=5
+            else:
+                par2=6
+            par2-=1
+            # boss+=1
+            # if ch[11]<=650000000000 and ch[12]<=650000000000:
+            #     return_population.append(ch)
+            #     cnt+=1
+            # if boss>=150:
+            #     break
         ch=cross_over(population[par1], population[par2])
         ch=get_score(ch)
         return_population[i]=(ch)
-    #sort
     return return_population
 
 def get_errors_and_sort(population):
